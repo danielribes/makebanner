@@ -1,3 +1,5 @@
+**makebanner** is a PHP script to make text banners as multipage PDF
+
 #Instructions
 1. Clone this repository
 2. Run: _composer update_   ... to install TCPDF
