@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: danielribes
- * Date: 4/8/17
- * Time: 16:46
+ * MakeBannerCommand
+ *
+ * @author Daniel Ribes <daniel@danielribes.com>
  */
 
 namespace MakeBanner;
@@ -16,43 +15,50 @@ use Symfony\Component\Console\Input\InputOption;
 
 class MakeBannerCommand extends Command {
 
+    /**
+     * configure command
+     */
     protected function configure()
     {
         $this->setName('makebanner')
-             ->setDescription('Tool to make multipage PDF banners')
-             ->setHelp("Usage: php makebanner.php --message='Text to banner' [--outline]\n")
+             ->setDescription('Tool to create multi page banners in PDF format')
+             ->setHelp("Usage: php makebanner.php --message='Text for the banner' [--outline]\n")
              ->addOption(
                 'message',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'el TEXT A imprimir!'
+                'Text for the banner : REQUIRED'
              )
              ->addOption(
                 'outline',
                 null,
                 InputOption::VALUE_NONE,
-                'el pdf en mode OUTLINE'
+                'Active the outline text mode'
              );
     }
 
 
-
+    /**
+     * execute the command
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
+     */
     protected function execute( InputInterface $input, OutputInterface $output )
     {
         if($input->getOption('message'))
         {
             $bm = new BannerMachine();
-
             if($input->getOption('outline'))
             {
                 $bm->setOutlineMode();
             }
-
             $bm->mainStreet($input->getOption('message'));
-            $output->writeln("Done!");
+            $output->writeln("Done, enjoy!");
         }
         else {
-            $output->writeln("\nUsage: php makebanner.php --message='Text to banner' [--outline]\n");
+            $output->writeln("\nUsage: php makebanner.php --message='Text for the banner' [--outline]\n");
         }
     }
 }
