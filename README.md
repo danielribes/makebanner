@@ -1,6 +1,6 @@
 **makebanner** is a PHP console tool to create multi page banners in PDF format
 
-#Instructions
+# Instructions
 1. Clone this repository
 2. Run: _composer update_   ... to install TCPDF and other dependencies
 3. Create the 'output' directory, with write permission
