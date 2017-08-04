@@ -32,14 +32,12 @@ class BannerMachine {
     public function mainStreet($message)
     {
         $this->initPDF();
-        $pHeight = $this->pdf->getPageHeight();
 
-        // Remove spaces, we do not want white pages in the pdf
+        // Remove spaces, do not want blank pages in the pdf
         $theText = preg_replace('/\s+/', '', $message);
 
-        // We separate the message character to character in UTF mode and set a character per page
-        $moreParams = array('page_height' => $pHeight);
-        array_walk(preg_split('/(?<!^)(?!$)/u', $theText), array($this, 'addCharacterPage'), $moreParams);
+        // Split the message in UTF mode and set a character per page
+        array_walk(preg_split('/(?<!^)(?!$)/u', $theText), array($this, 'addCharacterPage'));
 
         // That's all folks!
         $this->closePDF($this->outputDir.'/banner.pdf');
@@ -65,12 +63,12 @@ class BannerMachine {
     /**
      * Make page with a big character from input text
      * @param String $character
-     * @param Array $moreParams Callback extra parameters
+     *
      * @return Void
      */
-    private function addCharacterPage(&$character, $key, $moreParams)
+    private function addCharacterPage(&$character, $key)
     {
-        $pHeight = $moreParams['page_height'];
+        $pHeight = $this->pdf->getPageHeight();
         $this->pdf->AddPage();
 
         // Work fine on A4 paper size
