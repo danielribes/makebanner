@@ -2,9 +2,12 @@
 
 # Instructions
 1. Clone this repository
-2. Run: _composer update_   ... to install TCPDF and other dependencies
-3. Create the 'output' directory, with write permission
-4. Run: Usage: _$ php makebanner.php --message='Text for the banner'_
+2. Run: _composer update_   ... to install TCPDF and Symfony Console component
+3. Create the output directory called _output_, with write permission
+4. Run: 
+
+_$ php makebanner.php --message='Text for the banner'_
+
 5. Get the PDF in the ./output dir
 6. Enjoy!
 
