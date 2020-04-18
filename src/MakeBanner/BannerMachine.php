@@ -37,7 +37,8 @@ class BannerMachine {
         $theText = preg_replace('/\s+/', '', $message);
 
         // Split the message in UTF mode and set a character per page
-        array_walk(preg_split('/(?<!^)(?!$)/u', $theText), array($this, 'addCharacterPage'));
+        $characters = preg_split('/(?<!^)(?!$)/u', $theText);
+        array_walk($characters, array($this, 'addCharacterPage'));
 
         // That's all folks!
         $this->closePDF($this->outputDir.'/banner.pdf');
