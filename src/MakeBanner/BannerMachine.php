@@ -67,7 +67,7 @@ class BannerMachine {
      *
      * @return Void
      */
-    private function addCharacterPage(&$character, $key)
+    private function addCharacterPage(&$character)
     {
         $pHeight = $this->pdf->getPageHeight();
         $this->pdf->AddPage();
