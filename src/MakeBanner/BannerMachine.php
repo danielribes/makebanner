@@ -29,20 +29,32 @@ class BannerMachine {
      *
      * @param $message Text message for the banner
      */
-    public function mainStreet($message)
+    public function mainStreet(string $message): void
     {
         $this->initPDF();
 
-        // Remove spaces, do not want blank pages in the pdf
-        $theText = preg_replace('/\s+/', '', $message);
-
-        // Split the message in UTF mode and set a character per page
-        $characters = preg_split('/(?<!^)(?!$)/u', $theText);
+        $characters = $this->processText($message);
         array_walk($characters, array($this, 'addCharacterPage'));
 
         // That's all folks!
         $this->closePDF($this->outputDir.'/banner.pdf');
 
+    }
+
+    /**
+     * Sanitize the message and convert it to a character array 
+     * @param string $message
+     * @return string[]
+     */
+    public function processText(string $message): array
+    {
+        // Remove spaces, do not want blank pages in the pdf
+        $theText = preg_replace('/\s+/', '', $message);
+
+        // Split the message in UTF mode and set a character per page
+        $characters = preg_split('/(?<!^)(?!$)/u', $theText);
+
+        return $characters;
     }
 
 
