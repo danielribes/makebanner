@@ -44,7 +44,7 @@ class MakeBannerCommand extends Command {
      * @param OutputInterface $output
      * @return int
      */
-    protected function execute( InputInterface $input, OutputInterface $output )
+    protected function execute( InputInterface $input, OutputInterface $output ): int
     {
         if($input->getOption('message'))
         {
@@ -60,6 +60,6 @@ class MakeBannerCommand extends Command {
             $output->writeln("\nUsage: php makebanner.php --message='Text for the banner' [--outline]\n");
         }
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
