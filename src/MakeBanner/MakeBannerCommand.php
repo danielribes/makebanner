@@ -8,20 +8,21 @@
 namespace MakeBanner;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
 
+#[AsCommand(name: 'makebanner')]
 class MakeBannerCommand extends Command {
 
     /**
      * configure command
      */
-    protected function configure()
+    protected function configure(): void
     {
-        $this->setName('makebanner')
-             ->setDescription('Tool to create multi page banners in PDF format')
+        $this->setDescription('Tool to create multi page banners in PDF format')
              ->setHelp("Usage: php makebanner.php --message='Text for the banner' [--outline]\n")
              ->addOption(
                 'message',
@@ -59,6 +60,7 @@ class MakeBannerCommand extends Command {
         }
         else {
             $output->writeln("\nUsage: php makebanner.php --message='Text for the banner' [--outline]\n");
+            return Command::FAILURE;
         }
 
         return Command::SUCCESS;
