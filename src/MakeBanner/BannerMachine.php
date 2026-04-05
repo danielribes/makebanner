@@ -12,15 +12,14 @@ namespace MakeBanner;
 
 class BannerMachine {
 
-    private $outputDir;
-    private $pdf;
+    private string $outputDir;
+    private \TCPDF $pdf;
 
 
     public function __construct(\TCPDF $pdf)
     {
         $this->outputDir = getcwd().'/output';
         $this->pdf = $pdf;
-        //$this->pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     }
 
     /**
@@ -61,7 +60,7 @@ class BannerMachine {
     /**
      * Some PDF configurations
      */
-    private function initPDF()
+    private function initPDF(): void
     {
         $this->pdf->SetCreator(PDF_CREATOR);
         $this->pdf->SetAuthor('makebanner.php');
@@ -79,7 +78,7 @@ class BannerMachine {
      *
      * @return Void
      */
-    private function addCharacterPage(&$character)
+    private function addCharacterPage(string &$character): void
     {
         $pHeight = $this->pdf->getPageHeight();
         $this->pdf->AddPage();
@@ -95,7 +94,7 @@ class BannerMachine {
      * @param  String $filename (path + filename) to save PDF
      * @return Void
      */
-    private function closePDF($filename)
+    private function closePDF(string $filename): void
     {
         $this->pdf->Output($filename, 'F');
     }
@@ -104,7 +103,7 @@ class BannerMachine {
     /**
      * Yes! we have a outline text mode
      */
-    public function setOutlineMode()
+    public function setOutlineMode(): void
     {
         $this->pdf->setTextRenderingMode(3, false, false);
     }
