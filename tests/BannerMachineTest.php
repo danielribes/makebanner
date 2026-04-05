@@ -32,4 +32,22 @@ class BannerMachineTest extends TestCase
         $result = $this->machine->processText('Hé');
         $this->assertSame(['H','é'], $result);
     }
+
+    public function testMainStreetAddsOnePagePerCharacter(): void
+    {
+        $pdfMock = $this->createMock(\TCPDF::class);
+        $pdfMock->expects($this->exactly(3))->method('AddPage');
+
+        $machine = new BannerMachine($pdfMock);
+        $machine->mainStreet('ABC');
+    }
+
+    public function testMainStreetSavesThePdf(): void
+    {
+        $pdfMock = $this->createMock(\TCPDF::class);
+        $pdfMock->expects($this->once())->method('Output');
+
+        $machine = new BannerMachine($pdfMock);
+        $machine->mainStreet('A');
+    }
 }
