@@ -48,7 +48,8 @@ class MakeBannerCommand extends Command {
     {
         if($input->getOption('message'))
         {
-            $bm = new BannerMachine();
+            $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+            $bm = new BannerMachine($pdf);
             if($input->getOption('outline'))
             {
                 $bm->setOutlineMode();

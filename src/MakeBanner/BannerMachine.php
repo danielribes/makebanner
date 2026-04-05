@@ -16,11 +16,11 @@ class BannerMachine {
     private $pdf;
 
 
-    public function __construct()
+    public function __construct(\TCPDF $pdf)
     {
         $this->outputDir = getcwd().'/output';
-        $this->pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT,
-            PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $this->pdf = $pdf;
+        //$this->pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     }
 
     /**
