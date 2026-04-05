@@ -50,4 +50,15 @@ class BannerMachineTest extends TestCase
         $machine = new BannerMachine($pdfMock);
         $machine->mainStreet('A');
     }
+
+    public function testSetOutlineModeCallsCorrectRenderingMode(): void
+    {
+        $pdfMock = $this->createMock(\TCPDF::class);
+        $pdfMock->expects($this->once())
+                ->method('setTextRenderingMode')
+                ->with(3, false, false);
+
+        $machine = new BannerMachine($pdfMock);
+        $machine->setOutlineMode();
+    }
 }
