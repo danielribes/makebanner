@@ -11,8 +11,8 @@ class BannerMachineTest extends TestCase
 
     protected function setUp(): void
     {
-        $pdfMock = $this->createMock(\TCPDF::class);
-        $this->machine = new BannerMachine($pdfMock);
+        $pdfStub = $this->createStub(\TCPDF::class);
+        $this->machine = new BannerMachine($pdfStub);
     }
 
     public function testProcessTextReturnsArrayOfCharacters(): void
